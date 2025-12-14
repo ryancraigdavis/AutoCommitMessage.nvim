@@ -43,7 +43,7 @@ pip install neovim-remote
   dependencies = {
     "CopilotC-Nvim/CopilotChat.nvim",
   },
-  event = "VeryLazy",
+  ft = "gitcommit",
   opts = {},
 }
 ```

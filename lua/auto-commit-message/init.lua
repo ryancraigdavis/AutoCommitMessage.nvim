@@ -158,6 +158,16 @@ function M.setup(opts)
   create_autocmd()
   create_commands()
   create_keymap()
+
+  -- If we're already in a gitcommit buffer (lazy-loaded), trigger generation
+  vim.defer_fn(function()
+    if vim.bo.filetype == "gitcommit" and config.get().enabled then
+      local lines = vim.api.nvim_buf_get_lines(0, 0, 1, false)
+      if lines[1] and lines[1]:match("^%s*$") then
+        M.generate()
+      end
+    end
+  end, config.get().defer_delay)
 end
 
 return M

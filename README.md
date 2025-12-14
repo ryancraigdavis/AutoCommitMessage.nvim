@@ -39,7 +39,7 @@ pip install neovim-remote
 
 ```lua
 {
-  "yourusername/AutoCommitMessage.nvim",
+  "ryancraigdavis/AutoCommitMessage.nvim",
   dependencies = {
     "CopilotC-Nvim/CopilotChat.nvim",
   },
@@ -52,7 +52,7 @@ pip install neovim-remote
 
 ```lua
 use {
-  "yourusername/AutoCommitMessage.nvim",
+  "ryancraigdavis/AutoCommitMessage.nvim",
   requires = {
     "CopilotC-Nvim/CopilotChat.nvim",
   },

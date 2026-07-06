@@ -15,7 +15,7 @@ When you press `C` (uppercase) in LazyGit to create a commit, this plugin automa
 
 ## Requirements
 
-- **Neovim** 0.9+
+- **Neovim** 0.10+
 - **[CopilotChat.nvim](https://github.com/CopilotC-Nvim/CopilotChat.nvim)** - Chat interface for GitHub Copilot
 - **[copilot.lua](https://github.com/zbirenbaum/copilot.lua)** - GitHub Copilot integration
 - **[neovim-remote](https://github.com/mhinz/neovim-remote)** (`nvr`) - For LazyGit integration

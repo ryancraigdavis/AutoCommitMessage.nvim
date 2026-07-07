@@ -79,6 +79,8 @@ require("auto-commit-message").setup({
 
   -- Prompt sent to CopilotChat for generating commit messages
   prompt = 'Write commit message for the change with commitizen convention. '
+    .. 'The subject line (first line) must be 50 characters or fewer. '
+    .. 'If a body is needed, add a blank line after the subject and wrap the body at 72 characters. '
     .. 'Write clear, informative commit messages that explain the "what" and "why" '
     .. 'behind changes, not just the "how". '
     .. 'Return ONLY the commit message, no explanation or markdown formatting.',

@@ -20,6 +20,15 @@ local function clean_response(text)
   local cleaned = text:gsub("^```[^\n]*\n", ""):gsub("\n```%s*$", "")
   -- Trim leading/trailing whitespace
   cleaned = cleaned:gsub("^%s+", ""):gsub("%s+$", "")
+
+  -- Ensure a blank line separates the subject from the body (git convention).
+  -- Models sometimes emit the body directly under the subject with no gap.
+  local lines = vim.split(cleaned, "\n")
+  if #lines > 1 and vim.trim(lines[2]) ~= "" then
+    table.insert(lines, 2, "")
+    cleaned = table.concat(lines, "\n")
+  end
+
   return cleaned
 end
 

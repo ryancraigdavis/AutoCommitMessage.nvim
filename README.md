@@ -168,13 +168,26 @@ If you're using [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim):
 
 ## Health Check
 
-Run `:checkhealth auto-commit-message` to verify your setup. It checks for:
+Run `:checkhealth auto-commit-message` to verify your setup. Checks are grouped
+into sections:
 
-- neovim-remote (nvr) installation
-- CopilotChat.nvim presence
-- copilot.lua presence
-- Treesitter markdown parsers
-- LazyGit configuration
+- **system** — Neovim 0.10+, and `git`, `nvr` and `lazygit` availability
+  (with versions)
+- **copilot chat** — CopilotChat.nvim and copilot.lua are installed, the
+  `gitdiff` context provider this plugin depends on is available, and the
+  `markdown` / `markdown_inline` Treesitter parsers are present
+- **authorization & model** — Copilot is authorized, and the model configured
+  in CopilotChat actually exists (both make a live API request, so this section
+  may take a moment)
+- **lazygit integration** — locates your LazyGit config (via
+  `lazygit --print-config-dir`) and confirms it is wired to open commits in
+  Neovim through `nvr`
+- **plugin** — reports the active configuration (or notes that the plugin is
+  lazy-loaded and hasn't initialized yet)
+
+> **Tip:** Run the check from inside a commit buffer to also see the **plugin**
+> section populated — with `ft = "gitcommit"` lazy-loading, `setup()` only runs
+> once you open a commit.
 
 ## How It Works
 
@@ -235,9 +248,12 @@ Install treesitter parsers:
 
 ### Message not generated
 
+- If you see **"no staged changes to summarize"**, stage your changes first
+  (or set `staged_only = false` to use unstaged changes)
+- Run `:checkhealth auto-commit-message` — this verifies Copilot is authorized
+  and that your configured model exists, which are common causes
 - Check `:messages` for errors
 - Verify CopilotChat is working: `:CopilotChatCommitStaged`
-- Run `:checkhealth auto-commit-message`
 
 ### LazyGit uses wrong editor
 

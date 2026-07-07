@@ -237,8 +237,8 @@ local function check_plugin_config()
   local opts = config.get()
   if not opts or next(opts) == nil then
     info(
-      "Plugin not loaded yet — expected when lazy-loaded via `ft = \"gitcommit\"`; "
-        .. "setup() runs on the first commit buffer. Run this check inside a commit to see its config."
+      "Plugin not initialized in this session yet — call "
+        .. "require('auto-commit-message').setup() (lazy.nvim `opts = {}` does this on load)."
     )
     return
   end

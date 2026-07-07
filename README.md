@@ -43,10 +43,18 @@ pip install neovim-remote
   dependencies = {
     "CopilotC-Nvim/CopilotChat.nvim",
   },
-  ft = "gitcommit",
+  -- Load on VeryLazy so the gitcommit autocmd is registered ahead of time and
+  -- `:checkhealth auto-commit-message` works without opening a commit first.
+  event = "VeryLazy",
   opts = {},
 }
 ```
+
+> **Why `VeryLazy` and not `ft = "gitcommit"`?** The plugin only registers a
+> `gitcommit` autocmd, which must exist *before* that filetype triggers. Loading
+> on the filetype itself is too late and also hides the health check (a
+> not-yet-loaded plugin isn't on the runtimepath). If you prefer `ft`-based
+> loading, run `:Lazy load AutoCommitMessage.nvim` before `:checkhealth`.
 
 ### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
@@ -185,9 +193,10 @@ into sections:
 - **plugin** — reports the active configuration (or notes that the plugin is
   lazy-loaded and hasn't initialized yet)
 
-> **Tip:** Run the check from inside a commit buffer to also see the **plugin**
-> section populated — with `ft = "gitcommit"` lazy-loading, `setup()` only runs
-> once you open a commit.
+> **Note:** If you lazy-load the plugin with `ft = "gitcommit"` instead of
+> `event = "VeryLazy"`, `:checkhealth auto-commit-message` reports *"No
+> healthcheck found"* until the plugin loads. Run `:Lazy load
+> AutoCommitMessage.nvim` first, or use `VeryLazy` as shown in Installation.
 
 ## How It Works
 
